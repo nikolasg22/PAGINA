@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sistema de Monitoreo y Prediccion Metereologica</title>
+	
+	<!--Icono-->
+	<link rel="logomin" type="image/png" href="/img/logomin.png" />
+	
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/grayscale.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    
+    <!--Seguimiento de temperatura-->
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<!--clk-->
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+ 
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="navbar-inner">
+        <div class="container">
+        <a class="brand" href="index.html">         
+            <img src="img/logo.png" width="100" height="45" alt="SIMPREM" /></a>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    
+                    <li>
+                        <!--<a class="page-scroll"></a>-->
+                        
+                        
+                    </li>
+                                   
+                    <li>
+                        <a class="page-scroll" href="#nosotros"> ¿Quiénes somos?</a>
+                        <!--<a href="nosotros.html">¿Quiénes somos?</a>-->
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#monitoreo" > Monitoreo en Tiempo real</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="agro.html">Agricultura/Cultivos</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#historico">Histórico</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+        </div>
+        <!-- /.inner -->
+    </nav>
+
+    <!-- box container --->
+    <div class="boxcnt"> <br/>
+    <!-- Footer -->
+    <footer>
+        <div class="container" id="monitoreo">
+		<h2>Sensores</h2>
+        <div class="row">
+        <div class="col-sm-4"><span class="acl" style="color:#4D1B1B;color:#FFFFFF;font-size:12px;font-weight:bold">*Valores obtenidos el dia: <div id="leyenda_fecha"></div> <div id="leyenda_hora"></div></span></div>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4"></div>
+        </div>
+		<div class="row">
+        
+		<div class="col-sm-4"><center><h4>Temperatura</h4><h5 id="leyenda_temperatura" >15ºC (FRIO)</h5> <h5 id="rango_temperatura" ></h5> </center> 
+		 		
+		<center><canvas id="temperatura" width="200" height="300"/></center>
+		
+		
+		</div><div class="col-sm-4"><center><h4>Humedad</h4><h5 id="leyenda_humedad">69%</h5></center>
+		
+		<div style="width: 600px; height: 400px; margin: 0 auto">
+		<div id="container-speed" style="width: 300px; height: 200px; float: left"></div>
+		</div>
+		
+		<center><canvas id="humedad" width="200" height="300"/></center>
+		
+		</div><div class="col-sm-4"><center><h4>Velocidad del viento</h4><h5 id="leyenda_velocidad_viento">7Km/h</h5></center>
+		<div id="container-velocidad" style="min-width: 310px; max-width: 400px; height: 300px; margin: 0 auto"></div>
+		
+		<center><canvas id="velocidadViento" width="200" height="300"/></center>
+		
+		</div>
+		</div><br/><br/>
+		<div class="row">
+		<div class="col-sm-4"><center><h4>Presion</h4><h5 id="leyenda_presion">963.5 hPA</h5></center>
+		
+		<div style="width: 600px; height: 400px; margin: 0 auto">
+		<div id="container-rpm" style="width: 300px; height: 200px; float: left"></div>
+		</div>
+		
+		<center>
+		<canvas id="presionAtmosferica" width="200" height="300"/>
+		</center>
+		
+		
+		</div><div class="col-sm-4"><center><h4>Direccion del viento</h4><h5 id="leyenda_direccion_viento">oeste</h5></center>
+		
+		<!--<div id="container-viento" style="width: 300px; height: 300px; margin: 0 auto"></div>-->
+		
+		<center>
+		<canvas id="direccionViento" width="200" height="300"/>
+		</center>
+		
+		</div><div class="col-sm-4">
+		
+		<center><h4>Cantidad de lluvia</h4><h5 id="leyenda_lluvia">0 mm</h5></center><center><canvas id="lluvia" width="200" height="300"/></center>
+
+		</div>
+        </div>
+		</div>
+        
+        <!--Grafico de temperatura-->
+    <!--    <div id="container-temp" style="width: 800px; height: 310px; margin: 0 auto">
+            <div style="margin-top: 100px; text-align: center" id="loading">
+                <i class="fa fa-spinner fa-spin"></i> Loading data from external source
+            </div>
+        </div>
+     -->   
+
+        
+        
+		<br/><br/>
+		<div class="container" id="historico">
+		 <h2>Histórico</h2>
+                         
+      <table class="table table-bordered" style="background-color:#fff;color:gray">
+        <thead>
+          <tr style="background-color:#0072C6;color:#fff">
+            <th>#</th>
+            <th>Temperatura (ºC)</th>
+			<th>Humedad (%)</th>
+			<th>Velocidad del viento (km/h)</th>
+			<th>Direccion del viento</th>
+			<th>Presion atmosferica (hPa)</th>
+			<th>LLuvia (mm)</th>
+			<th>Fecha</th>
+			<th>Hora</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>15</td>
+			<td>60</td>
+			<td>9</td>
+			<td>NO</td>
+			<td>960</td>
+			<td>0</td>
+			<td>21/06/2015</td>
+			<td>18:00</td>
+          </tr>
+		  <tr>
+            <td>2</td>
+            <td>16</td>
+			<td>60</td>
+			<td>9</td>
+			<td>NO</td>
+			<td>970</td>
+			<td>0</td>
+			<td>21/06/2015</td>
+			<td>15:00</td>
+          </tr>
+		  <tr>
+            <td>3</td>
+            <td>15</td>
+			<td>55</td>
+			<td>3</td>
+			<td>O</td>
+			<td>965</td>
+			<td>0</td>
+			<td>21/06/2015</td>
+			<td>12:00</td>
+          </tr>
+         <tr>
+            <td>4</td>
+            <td>13</td>
+			<td>57</td>
+			<td>6</td>
+			<td>E</td>
+			<td>972</td>
+			<td>0</td>
+			<td>21/06/2015</td>
+			<td>09:00</td>
+          </tr>
+		  <tr>
+            <td>5</td>
+            <td>10</td>
+			<td>60</td>
+			<td>7</td>
+			<td>NO</td>
+			<td>965</td>
+			<td>0</td>
+			<td>21/06/2015</td>
+			<td>06:00</td>
+          </tr>
+		  <tr>
+            <td>6</td>
+            <td>8</td>
+			<td>60</td>
+			<td>6</td>
+			<td>O</td>
+			<td>966</td>
+			<td>0</td>
+			<td>21/06/2015</td>
+			<td>03:00</td>
+          </tr>
+        </tbody>
+      </table>
+	   <span style="color:#4D1B1B;color:#FFFFFF;font-size:12px;font-weight:bold">*Estos valores son un promedio de un censado.</span>    
+        </div>
+        
+        <div class="container" id="nosotros"><br/>
+		<h2>Nosotros</h2><br/>
+        
+    <header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <!--<h4 class="brand-heading">Simprem</h4>-->
+                          
+                        <img src="img/logo.png" width="500" height="245" alt="SIMPREM" />
+                      
+                        <p class="intro-text">Este es un proyecto de investigacion interuniversitario entre la Universidad Nacional de La Rioja y la Universidad Tecnologica Nacional Facultdad Regional La Rioja, que tiene como objetivo brindar posibles soluciones ante la falta de datos e informacion metereologicos que tiene lugar en la provincia de La Rioja, Argentina.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+        
+        <!--carusel for station photos-->   
+        <div id="estCarousel" class="carousel slide" data-ride="carousel">
+        <br/>
+        <br/>
+        <br/>
+      <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#estCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#estCarousel" data-slide-to="1"></li>
+      <li data-target="#estCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+    
+      <div class="item active">
+        <img src="img/estacion/estacion1.png" alt="Estacion" width="460" height="345">
+        <div class="carousel-caption">
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="img/estacion/estacion2.png" alt="Estacion" width="460" height="345">
+        <div class="carousel-caption">
+        </div>
+      </div>
+    
+      <div class="item">
+        <img src="img/estacion/estacion3.png" alt="Estacion" width="460" height="345">
+        <div class="carousel-caption">
+        </div>
+      </div>
+    
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#estCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#estCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+<!--structure description for students-->
+<div class="row">
+  <div class="col-sm-6"><br/>
+  <h3>equipo utn</h3>
+  <img src="../img/logoutn.png" alt="Foto" width="300" height="110"/>
+  <br />
+  
+  <div align="justify"> 
+  <h6>Desde nuestros comienzos como estudiantes de Ingeniería Electrónica en la Universidad Tecnológica Nacional – Facultad Regional La Rioja, el grupo siempre se focalizó en participar en proyectos de desarrollo tecnológico e innovación, logrando consolidar un equipo de trabajo, que incluye varios proyectos de carácter público y privado de nuestra provincia y sus alrededores.
+La realización del trabajo final de carrera nos permitió formar el equipo conformado por tres Ingenieros en Electrónica.
+Es nuestro compromiso usar las herramientas brindadas por nuestra profesión para la solución de problemas y mejora de calidad de vida de las personas de nuestra región ofreciendo soluciones tecnológicas de completo desarrollo local.  
+  </h6>
+  </div>
+  
+  </div>
+  <div class="col-sm-6"><br/>
+  <h3>equipo unlar</h3>
+  <img src="../img/logounlar.png" alt="Foto" width="300" height="110"/>
+  <br />
+  
+  <div align="justify">
+  <h6>
+  Somos un equipo conformado por estudiantes del carrera Lic. en Sistemas, realizando el proyecto final de la carrera en conjunto con estudiantes de la Universidad Tecnologica Nacional Sede la Rioja, el cual pretende poner de manifiesto todos los conocimientos adquiridos en la asignaturas que comprenden las disciplinas como planaeación, investigación, programación y elaborar productos y/o servicios que sean de utilidad para el crecimiento y/o desarrollo local como lo es el sistema que se presenta al comienzo.
+  </h6>
+  </div>  
+  
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+ <br/> 
+ <div class="container">
+  <h6>Diaz Garcia Maximiliano</h6>
+ <div class="col-sm-2"><img src="../img/fotomaxi.png" class="img-thumbnail" alt="Foto" width="236" height="236"/></div>
+  <div class="col-sm-4">
+    
+  <ul>
+  <li>
+  Ing. en Electrónica
+  </li>
+  <li>
+  diaz.garcia.maximiliano@gmail.com
+  </li>  
+  </ul>
+    
+  </div> 
+</div>
+   </div>
+  <div class="col-sm-6">
+ <br/>
+  <div class="container">
+  <h6>Olivera Jonathan Ezequiel</h6>
+  <div class="col-sm-2"><img src="../img/fotojoni.jpg" class="img-thumbnail" alt="Foto" width="236" height="236"/></div>
+  <div class="col-sm-4">
+  
+  <ul>
+  <li>
+  Lic. en Sistemas
+  </li>
+  <li>
+  joni292@hotmail.com
+  </li>  
+  </ul>
+  
+  </div> 
+</div>  
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-6">
+ <br/> 
+ <div class="container">
+  <h6>Morales Aldo Maciel</h6>
+ <div class="col-sm-2"><img src="../img/fotoaldo.jpg" class="img-thumbnail" alt="Foto" width="236" height="236"/></div>
+  <div class="col-sm-4">
+  
+  <ul>
+  <li>
+  Ing. en Electrónica
+  </li>
+  <li>
+  aldomil990@gmail.com
+  </li>  
+  </ul>
+  
+  </div> 
+</div>
+   </div>
+  <div class="col-sm-6">
+ <br/>
+  <div class="container">
+  <h6>Gasco Vera Jesús Nicolás</h6>
+  <div class="col-sm-2"><img src="../img/fotonico.JPG" class="img-thumbnail" alt="Foto" width="236" height="236"/></div>
+  <div class="col-sm-4">
+  
+  <ul>
+  <li>
+  Lic. en Sistemas
+  </li>
+  <li>
+  nikolsgv@gmail.com
+  </li>  
+  </ul>
+  
+  </div> 
+</div>  
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-6">
+ <br/> 
+ <div class="container">
+  <h6>Barrera Albarracin Félix José</h6>
+ <div class="col-sm-2"><img src="../img/fotojose.jpg" class="img-thumbnail" alt="Foto" width="236" height="236"/></div>
+  <div class="col-sm-4">
+    
+ <ul>
+  <li>
+  Ing. en Electrónica
+  </li>
+  <li>
+  barrera.albarracin@gmail.com
+  </li>  
+  </ul>
+ 
+  </div> 
+</div>
+   </div>
+  <div class="col-sm-6">
+ <br/>
+  <div class="container">
+  <h6>Herrera Hernán</h6>
+  <div class="col-sm-2"><img src="../img/fotohernan.jpg" class="img-thumbnail" alt="Foto" width="236" height="236"/></div>
+  <div class="col-sm-4">
+  
+    <ul>
+  <li>
+  Lic. en Sistemas
+  </li>
+  <li>
+  hernanh.2292@gmail.com
+  </li>  
+  </ul>
+   
+  </div> 
+</div>  
+  </div>
+</div>
+
+
+     </div>
+
+	 
+</div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+
+    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/grayscale.js"></script>
+	<!--clck-->
+	<!--<script type="text/javascript" src="jquery.tzineClock/jquery.tzineClock.js"></script>-->
+	<!--<script type="text/javascript" src="script.js"></script>-->
+	<!--<script src="../Chart.js"></script>-->
+	<script src="/js/medidores.js"></script>
+	
+	<!--Highcharts velocidad del viento-->
+	<script src="js/highcharts.js"></script>
+	<script src="js/highcharts-more.js"></script>
+	<script src="js/modules/exporting.js"></script>
+	<script src="js/themes/sand-signika.js"></script>
+	
+	<!--Highcharts humedad-->
+	<script src="js/highcharts(mod).js"></script>
+	<script src="js/modules/solid-gauge.js"></script>
+	    
+    
+
+
+
+</body>
+
+</html>

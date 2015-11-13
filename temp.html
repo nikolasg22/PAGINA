@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>Zeiger</title>
+ <script language="JavaScript"
+type="text/javascript">
+<!--
+document.write("<a href='javascript:showgrad();'><img
+border='0' src='Thermometer.gif' style='position:absolute; top:10px;
+left:10px'>");
+var thermometer = new multipic(301,"Thermometer","gif",91,100,50,"showgrad");
+  var grad;
+function multipic(id, img_name, img_ext, img_count, ypos, xpos,
+  link)
+  {
+  img_count++;
+  this.multipics = new Array( img_count );
+  this.multipic_count = img_count;
+  this.multipic_id = id; // class variables
+  for (i=0; i<img_count; i++)
+  {
+  this.multipics[i] = new Image();
+  this.multipics[i].src = img_name+i+'.'+img_ext;
+  }
+  this.Set = picSet; // class method
+  if (link == "nolink")
+  {
+  document.write("<img id='"+this.multipic_id+"'
+  style=position:absolute;top:"+ypos+"px;left:"+xpos+"px
+  src="+this.multipics[0].src+" border=0>");
+  }
+  else
+  {
+  document.write("<a href='javascript:" + link + "("
+  + id + ");'><img id='"+this.multipic_id+"'
+  style=position:absolute;top:"+ypos+"px;left:"+xpos+"px
+  src="+this.multipics[0].src+" border=0></a>");
+  }
+  }
+ function showgrad()
+{
+alert("Aktueller Wert: "+grad+"°");
+}
+function picSet(iCount)
+  {
+  for (i=0; i<this.multipic_count; i++)
+  {
+  if(iCount==i)
+  {
+  document.getElementById(this.multipic_id).src = this.multipics[i].src;
+  }
+  }
+  }
+function sensorChanged( iDevice, iSensor, iVal )
+  {
+  if (iSensor==0)
+  {
+  grad = iVal;
+  if(iVal!=0)
+  {
+  thermometer.Set(Math.round(iVal)+20);
+  }
+  else
+  {
+  thermometer.Set(0);
+  }
+  }
+  }
+  </script>
+  </head>
+	<body>
+		<applet name="Analog"
+		archive="A.jar" code="A.class" codebase="http://192.168.0.102"
+		height="0" width="0" mayscript>
+		<param name="device" value="0">
+		<param name="showerrors" value="off">
+		<param name="sensorpolling" value="on">
+		<param name="pollingrate" value="1000">
+		</applet>
+
+	</body>
+</html>
